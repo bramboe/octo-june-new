@@ -1,3 +1,17 @@
+## v1.0.0
+
+**Production Release**
+
+- Complete Home Assistant add-on implementation
+- Octo BLE support for smart beds
+- WebSocket-based ESPHome connection (no external dependencies)
+- Comprehensive error handling and timeouts
+- Add-on level 8 compliance
+- Support for all Home Assistant architectures
+- MQTT auto-detection and integration
+- Button for under bed lights (if present)
+- Covers to control motors for raising, lowering, and stopping the head/legs
+
 ## v0.0.1
 
 **Initial Release**

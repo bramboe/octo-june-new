@@ -42,5 +42,5 @@ LABEL \
     io.hass.name="Octo New June Integration via MQTT" \
     io.hass.description="Home Assistant Community Add-on for Octo Smartbeds" \
     io.hass.type="addon" \
-    io.hass.version="0.0.1" \
+    io.hass.version="1.0.0" \
     maintainer="Bram Boersma"
