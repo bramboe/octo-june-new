@@ -2,7 +2,6 @@
 
 **Initial Release**
 
-- Forked from smartbed-mqtt project
 - Removed all bed support except Octo
 - Updated project name to "Octo New June"
 - Updated author to Bram Boersma

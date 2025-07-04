@@ -1,4 +1,3 @@
-import { BluetoothGATTCharacteristic, BluetoothGATTService } from '@2colors/esphome-native-api';
 import { BLEAdvertisement } from './BLEAdvertisement';
 import { BLEDeviceInfo } from './BLEDeviceInfo';
 
@@ -15,8 +14,8 @@ export interface IBLEDevice {
     serviceUuid: string,
     characteristicUuid: string,
     writeLogs?: boolean
-  ): Promise<BluetoothGATTCharacteristic | undefined>;
-  getServices(): Promise<BluetoothGATTService[]>;
+  ): Promise<any | undefined>;
+  getServices(): Promise<any[]>;
   subscribeToCharacteristic(handle: number, notify: (data: Uint8Array) => void): Promise<void>;
   readCharacteristic(handle: number): Promise<Uint8Array>;
   getDeviceInfo(): Promise<BLEDeviceInfo | undefined>;

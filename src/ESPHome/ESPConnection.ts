@@ -1,21 +1,24 @@
-import { Connection } from '@2colors/esphome-native-api';
 import { Deferred } from '@utils/deferred';
 import { logInfo, logWarn } from '@utils/logger';
 import { IESPConnection } from './IESPConnection';
-import { connect } from './connect';
+import { connect, ESPHomeConnection } from './connect';
 import { BLEAdvertisement } from './types/BLEAdvertisement';
 import { BLEDevice } from './types/BLEDevice';
 import { IBLEDevice } from './types/IBLEDevice';
 
 export class ESPConnection implements IESPConnection {
-  constructor(private connections: Connection[]) {}
+  constructor(private connections: ESPHomeConnection[]) {}
 
   async reconnect(): Promise<void> {
     this.disconnect();
     logInfo('[ESPHome] Reconnecting...');
     this.connections = await Promise.all(
       this.connections.map((connection) =>
-        connect(new Connection({ host: connection.host, port: connection.port, password: connection.password }))
+        connect(new WebSocketESPHomeConnection({ 
+          host: connection.host, 
+          port: connection.port, 
+          password: connection.password 
+        }))
       )
     );
   }
@@ -60,7 +63,7 @@ export class ESPConnection implements IESPConnection {
     nameMapper?: (name: string) => string
   ) {
     const seenAddresses: number[] = [];
-    const listenerBuilder = (connection: Connection) => ({
+    const listenerBuilder = (connection: ESPHomeConnection) => ({
       connection,
       listener: (advertisement: BLEAdvertisement) => {
         let { name } = advertisement;
@@ -75,11 +78,42 @@ export class ESPConnection implements IESPConnection {
     });
     const listeners = this.connections.map(listenerBuilder);
     for (const { connection, listener } of listeners) {
-      connection.on('message.BluetoothLEAdvertisementResponse', listener).subscribeBluetoothAdvertisementService();
+      connection.on('message.BluetoothLEAdvertisementResponse', listener);
+      connection.subscribeBluetoothAdvertisementService();
     }
     await complete;
     for (const { connection, listener } of listeners) {
       connection.off('message.BluetoothLEAdvertisementResponse', listener);
     }
   }
+}
+
+// Temporary class to create new connections for reconnection
+class WebSocketESPHomeConnection implements ESPHomeConnection {
+  constructor(public config: any) {
+    this.host = config.host;
+    this.port = config.port || 6053;
+    this.password = config.password;
+    this.connected = false;
+  }
+
+  public host: string;
+  public port: number;
+  public password?: string;
+  public connected: boolean;
+
+  connect(): void {}
+  disconnect(): void {}
+  on(): void {}
+  off(): void {}
+  once(): void {}
+  deviceInfoService(): Promise<any> { return Promise.resolve({}); }
+  pairBluetoothDeviceService(): Promise<{ paired: boolean }> { return Promise.resolve({ paired: false }); }
+  connectBluetoothDeviceService(): Promise<void> { return Promise.resolve(); }
+  disconnectBluetoothDeviceService(): Promise<void> { return Promise.resolve(); }
+  writeBluetoothGATTCharacteristicService(): Promise<void> { return Promise.resolve(); }
+  listBluetoothGATTServicesService(): Promise<{ servicesList: any[] }> { return Promise.resolve({ servicesList: [] }); }
+  readBluetoothGATTCharacteristicService(): Promise<{ data: string }> { return Promise.resolve({ data: '' }); }
+  notifyBluetoothGATTCharacteristicService(): Promise<void> { return Promise.resolve(); }
+  subscribeBluetoothAdvertisementService(): Promise<void> { return Promise.resolve(); }
 }

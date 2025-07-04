@@ -2,15 +2,6 @@
 # yarn lockfile v1
 
 
-"@2colors/esphome-native-api@^1.3.1":
-  version "1.3.1"
-  resolved "https://registry.yarnpkg.com/@2colors/esphome-native-api/-/esphome-native-api-1.3.1.tgz#9e7914dd5422b027735500fcac9e5fc03f74abb8"
-  integrity sha512-jDhL+31DCY2oY2s70QlRavdIIPtrIvDJlrvQsZPFxt9ORezGlgRc2lwRLGBrsxFPwoBPFm64cTX4FmpVmKB6VQ==
-  dependencies:
-    "@richardhopton/noise-c.wasm" "^0.5.0"
-    google-protobuf "^3.21.2"
-    multicast-dns "^7.2.5"
-
 "@ampproject/remapping@^2.2.0":
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/@ampproject/remapping/-/remapping-2.2.0.tgz#56c133824780de3174aed5ab6834f3026790154d"
@@ -717,11 +708,6 @@
     "@jridgewell/resolve-uri" "3.1.0"
     "@jridgewell/sourcemap-codec" "1.4.14"
 
-"@leichtgewicht/ip-codec@^2.0.1":
-  version "2.0.4"
-  resolved "https://registry.yarnpkg.com/@leichtgewicht/ip-codec/-/ip-codec-2.0.4.tgz#b2ac626d6cb9c8718ab459166d4bb405b8ffa78b"
-  integrity sha512-Hcv+nVC0kZnQ3tD9GVu5xSMR4VVYOteQIr/hwFPVEvPdlXqgGEuRjiheChHgdM+JyqdgNcmzZOX/tnl0JOiI7A==
-
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
   resolved "https://registry.yarnpkg.com/@nodelib/fs.scandir/-/fs.scandir-2.1.5.tgz#7619c2eb21b25483f6d167548b4cfd5a7488c3d5"
@@ -742,11 +728,6 @@
   dependencies:
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
-
-"@richardhopton/noise-c.wasm@^0.5.0":
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/@richardhopton/noise-c.wasm/-/noise-c.wasm-0.5.0.tgz#ccb4b008ca91c0f18f31a7b6f9174cfdf830e94c"
-  integrity sha512-ueWk5iy/0fOf4cNHXfZvwq1w1mIsgi/2ZMO+3bjiV+KupmWdgyTljWNIh7wjjwML7r1BtVkzjws9wHwVlp4JPA==
 
 "@sinclair/typebox@^0.25.16":
   version "0.25.24"
@@ -1547,13 +1528,6 @@ dir-glob@^3.0.1:
   dependencies:
     path-type "^4.0.0"
 
-dns-packet@^5.2.2:
-  version "5.6.1"
-  resolved "https://registry.yarnpkg.com/dns-packet/-/dns-packet-5.6.1.tgz#ae888ad425a9d1478a0674256ab866de1012cf2f"
-  integrity sha512-l4gcSouhcgIKRvyy99RNVOgxXiicE+2jZoNmaNmZ6JXiGajBOJAesk1OBlJuM5k2c+eudGdLxDqXuPCKIj6kpw==
-  dependencies:
-    "@leichtgewicht/ip-codec" "^2.0.1"
-
 duplexify@^4.1.1:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/duplexify/-/duplexify-4.1.2.tgz#18b4f8d28289132fa0b9573c898d9f903f81c7b0"
@@ -1952,11 +1926,6 @@ globby@^11.0.4, globby@^11.1.0:
     ignore "^5.2.0"
     merge2 "^1.4.1"
     slash "^3.0.0"
-
-google-protobuf@^3.21.2:
-  version "3.21.2"
-  resolved "https://registry.yarnpkg.com/google-protobuf/-/google-protobuf-3.21.2.tgz#4580a2bea8bbb291ee579d1fefb14d6fa3070ea4"
-  integrity sha512-3MSOYFO5U9mPGikIYCzK0SaThypfGgS6bHqrUGXG3DPHCrb+txNqeEcns1W0lkGfk0rCyNXm7xB9rMxnCiZOoA==
 
 graceful-fs@^4.2.9:
   version "4.2.11"
@@ -2862,14 +2831,6 @@ ms@^2.1.3:
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.3.tgz#574c8138ce1d2b5861f0b44579dbadd60c6615b2"
   integrity sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==
 
-multicast-dns@^7.2.5:
-  version "7.2.5"
-  resolved "https://registry.yarnpkg.com/multicast-dns/-/multicast-dns-7.2.5.tgz#77eb46057f4d7adbd16d9290fa7299f6fa64cced"
-  integrity sha512-2eznPJP8z2BFLX50tf0LuODrpINqP1RVIm/CObbTcBRITQgmC/TjcREF1NeTBzIcR5XO/ukWo+YHOjBbFwIupg==
-  dependencies:
-    dns-packet "^5.2.2"
-    thunky "^1.0.2"
-
 mylas@^2.1.9:
   version "2.1.13"
   resolved "https://registry.yarnpkg.com/mylas/-/mylas-2.1.13.tgz#1e23b37d58fdcc76e15d8a5ed23f9ae9fc0cbdf4"
@@ -3447,11 +3408,6 @@ through@^2.3.8:
   resolved "https://registry.yarnpkg.com/through/-/through-2.3.8.tgz#0dd4c9ffaabc357960b1b724115d7e0e86a2e1f5"
   integrity sha512-w89qg7PI8wAdvX60bMDP+bFoD5Dvhm9oLheFp5O4a2QF0cSBGsBX4qZmadPMvVqlLJBBci+WqGGOAPvcDeNSVg==
 
-thunky@^1.0.2:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/thunky/-/thunky-1.1.0.tgz#5abaf714a9405db0504732bbccd2cedd9ef9537d"
-  integrity sha512-eHY7nBftgThBqOyHGVN+l8gF0BucP09fMo0oO/Lb0w1OF80dJv+lDVpXG60WMQvkcxAkNybKsrEIE3ZtKGmPrA==
-
 tmpl@1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/tmpl/-/tmpl-1.0.5.tgz#8683e0b902bb9c20c4f726e3c0b69f36518c07cc"
@@ -3670,6 +3626,11 @@ ws@^7.5.5:
   version "7.5.10"
   resolved "https://registry.yarnpkg.com/ws/-/ws-7.5.10.tgz#58b5c20dc281633f6c19113f39b349bd8bd558d9"
   integrity sha512-+dbF1tHwZpXcbOJdVOkzLDxZP1ailvSxM6ZweXTegylPny803bFhA+vqBYw4s31NSAk4S2Qz+AKXK9a4wkdjcQ==
+
+ws@^8.14.2:
+  version "8.18.3"
+  resolved "https://registry.yarnpkg.com/ws/-/ws-8.18.3.tgz#b56b88abffde62791c639170400c93dcb0c95472"
+  integrity sha512-PEIGCY5tSlUt50cqyMXfCzX+oOPqN0vuGqWzbcJ2xvnkzkq46oOpz7dQaTDBdfICb4N14+GARUDw2XV2N4tvzg==
 
 xtend@^4.0.2:
   version "4.0.2"

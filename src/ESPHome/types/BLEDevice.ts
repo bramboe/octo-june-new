@@ -1,16 +1,16 @@
-import { BluetoothGATTService, Connection } from '@2colors/esphome-native-api';
 import { Dictionary } from '@utils/Dictionary';
 import { BLEAdvertisement } from './BLEAdvertisement';
 import { BLEDeviceInfo } from './BLEDeviceInfo';
 import { IBLEDevice } from './IBLEDevice';
 import { logInfo } from '@utils/logger';
+import { ESPHomeConnection } from '../connect';
 
 export class BLEDevice implements IBLEDevice {
   private connected = false;
   private paired = false;
 
-  private servicesList?: BluetoothGATTService[];
-  private serviceCache: Dictionary<BluetoothGATTService | null> = {};
+  private servicesList?: any[];
+  private serviceCache: Dictionary<any | null> = {};
 
   private deviceInfo?: BLEDeviceInfo;
 
@@ -25,7 +25,7 @@ export class BLEDevice implements IBLEDevice {
     return this.advertisement.serviceUuidsList;
   }
 
-  constructor(public name: string, public advertisement: BLEAdvertisement, private connection: Connection) {
+  constructor(public name: string, public advertisement: BLEAdvertisement, private connection: ESPHomeConnection) {
     this.mac = this.address.toString(16).padStart(12, '0');
     this.connection.on('message.BluetoothDeviceConnectionResponse', ({ address, connected }) => {
       if (this.address !== address || this.connected === connected) return;
@@ -70,7 +70,7 @@ export class BLEDevice implements IBLEDevice {
       return undefined;
     }
 
-    const characteristic = service?.characteristicsList?.find((c) => c.uuid === characteristicUuid);
+    const characteristic = service?.characteristicsList?.find((c: any) => c.uuid === characteristicUuid);
     if (!characteristic) {
       writeLogs && logInfo('[BLE] Could not find expected characteristic for device:', characteristicUuid, this.name);
       return undefined;
@@ -80,7 +80,7 @@ export class BLEDevice implements IBLEDevice {
   };
 
   subscribeToCharacteristic = async (handle: number, notify: (data: Uint8Array) => void) => {
-    this.connection.on('message.BluetoothGATTNotifyDataResponse', (message) => {
+    this.connection.on('message.BluetoothGATTNotifyDataResponse', (message: any) => {
       if (message.address != this.address || message.handle != handle) return;
       notify(new Uint8Array([...Buffer.from(message.data, 'base64')]));
     });
@@ -95,7 +95,7 @@ export class BLEDevice implements IBLEDevice {
   getDeviceInfo = async () => {
     if (this.deviceInfo) return this.deviceInfo;
     const services = await this.getServices();
-    const service = services.find((s) => s.uuid === '0000180a-0000-1000-8000-00805f9b34fb');
+    const service = services.find((s: any) => s.uuid === '0000180a-0000-1000-8000-00805f9b34fb');
     if (!service) return undefined;
 
     const deviceInfo: BLEDeviceInfo = (this.deviceInfo = {});
@@ -120,12 +120,10 @@ export class BLEDevice implements IBLEDevice {
   };
 
   private getService = async (serviceUuid: string) => {
-    const cachedService = this.serviceCache[serviceUuid];
-    if (cachedService !== undefined) return cachedService;
-
+    if (this.serviceCache[serviceUuid] !== undefined) return this.serviceCache[serviceUuid];
     const services = await this.getServices();
-    const service = services.find((s) => s.uuid === serviceUuid) || null;
-    this.serviceCache[serviceUuid] = service;
+    const service = services.find((s: any) => s.uuid === serviceUuid);
+    this.serviceCache[serviceUuid] = service || null;
     return service;
   };
 }
