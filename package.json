@@ -1,9 +1,9 @@
 {
-  "name": "octo-june",
-  "version": "0.0.2",
-  "description": "Octo June MQTT integration",
-  "author": "Bram",
-  "repository": "git@github.com:bramboe/octo-june-new.git",
+  "name": "octo-new-june",
+  "version": "0.0.1",
+  "description": "Octo Smartbed MQTT integration",
+  "author": "Bram Boersma",
+  "repository": "https://github.com/bramboe/octo-june-new",
   "license": "MIT",
   "type": "module",
   "main": "./dist/tsc/index.js",
@@ -54,6 +54,7 @@
   },
   "dependencies": {
     "@2colors/esphome-native-api": "^1.3.1",
+    "axios": "^1.7.4",
     "mqtt": "^4.2.8"
   }
 }

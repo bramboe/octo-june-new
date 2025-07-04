@@ -13,7 +13,7 @@ const processExit = (exitCode?: number) => {
 };
 
 process.on('exit', () => {
-  logWarn('Shutting down Octo-June...');
+  logWarn('Shutting down Octo-New-June...');
   processExit(0);
 });
 process.on('SIGINT', () => processExit(0));

@@ -1,29 +1,17 @@
-# Changelog
+## v0.0.1
 
-All notable changes to this project will be documented in this file.
+**Initial Release**
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+- Forked from smartbed-mqtt project
+- Removed all bed support except Octo
+- Updated project name to "Octo New June"
+- Updated author to Bram Boersma
+- Updated repository to https://github.com/bramboe/octo-june-new
+- Set version to 0.0.1
 
-## [0.0.2] - 2025-07-04
+**Features**
 
-### Changed
-- Version bump for maintenance and sync
-
-## [0.0.1] - 2025-01-XX
-
-### Added
-- Initial release of Octo June addon
-- Support for Octo smart beds via BLE
-- MQTT integration for Home Assistant
-- BLE proxy support via ESPHome
-- Motor control (head/feet raising/lowering/stopping)
-- Light switch control (if supported by bed)
-- Preset buttons and programming
-- PIN lock support for secured beds
-
-### Technical
-- Based on smartbed-mqtt project
-- Simplified to only support Octo bed type
-- Maintains MQTT and BLE proxy functionality
-- TypeScript implementation with proper type safety
+- Octo BLE support for smart beds
+- Button for under bed lights (if present)
+- Covers to control motors for raising, lowering, and stopping the head/legs
+- MQTT integration with Home Assistant 

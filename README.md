@@ -1,21 +1,21 @@
-# Octo June
+# Octo New June
 
-This project enables remote control of Octo smart beds from Home Assistant via MQTT.
+This project aims to enable remote control of Octo smart beds from HomeAssistant.
 
-## Support
+## Support is for:
 
 ### Local Bluetooth Low Energy (BLE)
 
-<em>NOTE: This requires an [ESPHome BLE Proxy](#ble-proxy)</em>
+<em>NOTE: The following requires an [ESPHome BLE Proxy](#ble-proxy)</em>
 
-- [Octo](#octo-support-ble) - Smart bed control via BLE
+- [Octo](#octo-support-ble) [prototype]
 
 # Installation
 
 - In HomeAssistant click Settings, Add-ons, and Add-on Store.
 - Click the 3 dot menu in the top right and select Repositories.
 - Paste https://github.com/bramboe/octo-june-new, click Add, and Close
-- Select the Octo June add-on from the list, and click Install.
+- Select the Octo New June add-on from the list, and click Install.
 - Wait patiently for the build to finish.
 - Click on Configuration and set type followed by the necessary configuration as described below.
 - Click on Info and click Start.
@@ -32,49 +32,19 @@ For BLE controlled beds a dedicated ESP32 running ESPHome's bluetooth proxy is r
 
 ## Configuring
 
-You must specify at least one bleProxy as demonstrated in the config defaults. You also need to supply at least one Octo controller with `name`, `friendlyName`, and optionally `pin`.
+You must specify at least one bleProxy as demonstrated in the config defaults. You also need to supply at least one Octo controller with `name`, `friendlyName`, and optional `pin`.
 
 ## Current features include:
 
-- Buttons to trigger the presets
-- Buttons to program the presets
-- Switch for under bed lights
-- Covers to control motors for raising, lowering, and stopping the head/feet
+- Button for under bed lights, if present
+- Covers to control motors for raising, lowering, and stopping the head/legs
 
 ## Notes
 
 This remains connected to the bed controller and due to the bed only accepting one connection it will stop you from using the app to control the bed.
 
-If your bed has a PIN lock enabled, you must provide the 4-digit PIN in the configuration.
+Initial prototyping was only possible due to assistance from Murp on Discord.
 
-## Configuration Example
+# Support
 
-```json
-{
-  "mqtt_host": "<auto_detect>",
-  "mqtt_port": "<auto_detect>",
-  "mqtt_user": "<auto_detect>",
-  "mqtt_password": "<auto_detect>",
-  "type": "octo",
-  "bleProxies": [
-    {
-      "host": "bluetooth-proxy.local"
-    }
-  ],
-  "octoDevices": [
-    {
-      "name": "RC2",
-      "friendlyName": "Octo Bed",
-      "pin": "1234"
-    }
-  ]
-}
-```
-
-## Author
-
-Bram
-
-## License
-
-MIT
+For help with setup, or for sharing feedback please join the Discord server https://discord.gg/Hf3kpFjbZs
