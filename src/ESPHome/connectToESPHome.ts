@@ -26,6 +26,7 @@ class WebSocketESPHomeConnection implements ESPHomeConnection {
   private eventListeners: Map<string, ((...args: any[]) => void)[]> = new Map();
   private messageId = 0;
   private pendingRequests: Map<number, { resolve: (value: any) => void; reject: (error: any) => void }> = new Map();
+  private connectionTimeout?: NodeJS.Timeout;
 
   constructor(public config: BLEProxy) {
     this.host = config.host;
@@ -43,9 +44,21 @@ class WebSocketESPHomeConnection implements ESPHomeConnection {
     const url = `ws://${this.host}:${this.port}`;
     this.ws = new WebSocket(url);
     
+    // Set connection timeout
+    this.connectionTimeout = setTimeout(() => {
+      if (!this.connected) {
+        logError('[ESPHome] Connection timeout to:', this.host);
+        this.emit('error', new Error('Connection timeout'));
+      }
+    }, 10000); // 10 second timeout
+    
     this.ws.on('open', () => {
       logInfo('[ESPHome] WebSocket connected to:', this.host);
       this.connected = true;
+      if (this.connectionTimeout) {
+        clearTimeout(this.connectionTimeout);
+        this.connectionTimeout = undefined;
+      }
       this.emit('authorized');
     });
 
@@ -60,16 +73,28 @@ class WebSocketESPHomeConnection implements ESPHomeConnection {
 
     this.ws.on('error', (error: any) => {
       logError('[ESPHome] WebSocket error:', error);
+      if (this.connectionTimeout) {
+        clearTimeout(this.connectionTimeout);
+        this.connectionTimeout = undefined;
+      }
       this.emit('error', error);
     });
 
     this.ws.on('close', () => {
       this.connected = false;
+      if (this.connectionTimeout) {
+        clearTimeout(this.connectionTimeout);
+        this.connectionTimeout = undefined;
+      }
       logInfo('[ESPHome] WebSocket disconnected from:', this.host);
     });
   }
 
   disconnect(): void {
+    if (this.connectionTimeout) {
+      clearTimeout(this.connectionTimeout);
+      this.connectionTimeout = undefined;
+    }
     if (this.ws) {
       this.ws.close();
       this.ws = undefined;
@@ -120,7 +145,20 @@ class WebSocketESPHomeConnection implements ESPHomeConnection {
       const message = { id, type, ...data };
       
       this.pendingRequests.set(id, { resolve, reject });
-      this.ws.send(JSON.stringify(message));
+      
+      // Add timeout for request
+      const requestTimeout = setTimeout(() => {
+        this.pendingRequests.delete(id);
+        reject(new Error(`Request timeout for ${type}`));
+      }, 5000); // 5 second timeout
+      
+      try {
+        this.ws.send(JSON.stringify(message));
+      } catch (error) {
+        this.pendingRequests.delete(id);
+        clearTimeout(requestTimeout);
+        reject(error);
+      }
     });
   }
 

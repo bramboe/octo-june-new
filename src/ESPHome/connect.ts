@@ -1,5 +1,4 @@
 import { logError, logInfo } from '@utils/logger';
-import WebSocket from 'ws';
 
 export interface ESPHomeConnection {
   host: string;
