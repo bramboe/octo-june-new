@@ -1,6 +1,6 @@
 {
   "name": "Octo June",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "slug": "octo-june",
   "description": "A Home Assistant add-on to enable controlling Octo smart beds.",
   "url": "https://github.com/bramboe/octo-june-new",
