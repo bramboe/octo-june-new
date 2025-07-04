@@ -36,6 +36,8 @@ RUN chmod a+x run.sh
 COPY --from=0 /octo-new-june/node_modules /octo-new-june/node_modules
 COPY --from=0 /octo-new-june/dist/tsc/ /octo-new-june/
 
+EXPOSE 8099
+
 ENTRYPOINT [ "/octo-new-june/run.sh" ]
 #ENTRYPOINT [ "node", "index.js" ]
 LABEL \

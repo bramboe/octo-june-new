@@ -58,4 +58,8 @@ else
     echo "Using configured MQTT password: <hidden>"
 fi
 
-node index.js
+# Start the config UI server in the background
+node dist/tsc/server.js &
+
+# Start the main logic
+node dist/tsc/index.js

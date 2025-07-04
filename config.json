@@ -13,8 +13,6 @@
   "ingress": true,
   "panel_icon": "mdi:bed",
   "panel_title": "Octo Bed",
-  "watchdog": "tcp://[HOST]:[PORT]",
-  "healthcheck": "CMD-SHELL curl -f http://localhost:[PORT]/ || exit 1",
   "options": {
     "mqtt_host": "<auto_detect>",
     "mqtt_port": "<auto_detect>",
