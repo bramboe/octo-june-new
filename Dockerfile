@@ -7,6 +7,8 @@ RUN yarn install --frozen-lockfile
 
 COPY . .
 
+RUN yarn build
+
 # Expose a default port (change if your app uses a different one)
 EXPOSE 3000
 
