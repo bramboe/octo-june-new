@@ -1,20 +1,20 @@
-FROM node:20-alpine
+FROM node:18-alpine
 
 RUN apk --no-cache add git
 
-COPY octo-june/package.json /octo-june/
-COPY octo-june/yarn.lock /octo-june/
-WORKDIR /octo-june
+COPY package.json /smartbed-mqtt/
+COPY yarn.lock /smartbed-mqtt/
+WORKDIR /smartbed-mqtt
 
 RUN yarn install
 
-COPY octo-june/src /octo-june/src/
-COPY octo-june/tsconfig.build.json /octo-june/
-COPY octo-june/tsconfig.json /octo-june/
+COPY src /smartbed-mqtt/src/
+COPY tsconfig.build.json /smartbed-mqtt/
+COPY tsconfig.json /smartbed-mqtt/
 
 RUN yarn build:ci
 
-FROM node:20-alpine
+FROM node:18-alpine
 
 # Add env
 ENV LANG C.UTF-8
@@ -29,20 +29,18 @@ RUN apk add --no-cache bash curl jq && \
 # Set shell
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
-WORKDIR /octo-june
-COPY octo-june/run.sh /octo-june/
+WORKDIR /smartbed-mqtt
+COPY run.sh /smartbed-mqtt/
 RUN chmod a+x run.sh
 
-COPY --from=0 /octo-june/node_modules /octo-june/node_modules
-COPY --from=0 /octo-june/dist/tsc/ /octo-june/
+COPY --from=0 /smartbed-mqtt/node_modules /smartbed-mqtt/node_modules
+COPY --from=0 /smartbed-mqtt/dist/tsc/ /smartbed-mqtt/
 
-EXPOSE 8099
-
-ENTRYPOINT [ "/octo-june/run.sh" ]
+ENTRYPOINT [ "/smartbed-mqtt/run.sh" ]
 #ENTRYPOINT [ "node", "index.js" ]
 LABEL \
-    io.hass.name="Octo June Integration via MQTT" \
-    io.hass.description="Home Assistant Community Add-on for Octo Smartbeds" \
+    io.hass.name="Smartbed Integration via MQTT" \
+    io.hass.description="Home Assistant Community Add-on for Smartbeds" \
     io.hass.type="addon" \
-    io.hass.version="0.0.1" \
-    maintainer="Bram Boersma"
+    io.hass.version="1.1.22" \
+    maintainer="Richard Hopton <richard@thehoptons.com>"
