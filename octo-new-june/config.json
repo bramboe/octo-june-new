@@ -1,6 +1,6 @@
 {
-  "name": "Octo New June",
-  "version": "1.0.0",
+  "name": "Octo June",
+  "version": "0.0.1",
   "slug": "octo-new-june",
   "description": "A Home Assistant add-on to enable controlling Octo smart beds.",
   "url": "https://github.com/bramboe/octo-june-new",
@@ -13,6 +13,8 @@
   "ingress": true,
   "panel_icon": "mdi:bed",
   "panel_title": "Octo Bed",
+  "watchdog": "tcp://[HOST]:8099",
+  "healthcheck": "CMD-SHELL curl -f http://localhost:8099/ || exit 1",
   "options": {
     "mqtt_host": "<auto_detect>",
     "mqtt_port": "<auto_detect>",

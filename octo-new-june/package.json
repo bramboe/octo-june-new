@@ -1,8 +1,8 @@
 {
-  "name": "octo-new-june",
-  "version": "1.0.0",
+  "name": "octo-june",
+  "version": "0.0.1",
   "description": "Octo Smartbed MQTT integration",
-  "author": "Bram Boersma",
+  "author": "Bram",
   "repository": "https://github.com/bramboe/octo-june-new",
   "license": "MIT",
   "type": "module",

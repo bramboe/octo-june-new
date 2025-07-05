@@ -12,7 +12,7 @@ app.use(express.json());
 app.use('/', express.static(path.join(__dirname, 'public')));
 
 // API: Get config
-app.get('/api/config', (req: Request, res: Response) => {
+app.get('/api/config', (_req: Request, res: Response) => {
   try {
     const config = JSON.parse(fs.readFileSync(configPath, 'utf-8'));
     res.json(config);
@@ -22,9 +22,9 @@ app.get('/api/config', (req: Request, res: Response) => {
 });
 
 // API: Update config
-app.post('/api/config', (req: Request, res: Response) => {
+app.post('/api/config', (_req: Request, res: Response) => {
   try {
-    fs.writeFileSync(configPath, JSON.stringify(req.body, null, 2));
+    fs.writeFileSync(configPath, JSON.stringify(_req.body, null, 2));
     res.json({ success: true });
   } catch (e) {
     res.status(500).json({ error: 'Failed to write config' });

@@ -1,4 +1,4 @@
-# Octo New June
+# Octo June
 
 This project aims to enable remote control of Octo smart beds from HomeAssistant.
 
