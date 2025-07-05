@@ -1,18 +1,6 @@
 import { readFileSync } from 'fs';
 
 export type Type =
-  | 'sleeptracker'
-  | 'ergomotion'
-  | 'ergowifi'
-  | 'richmat'
-  | 'linak'
-  | 'solace'
-  | 'motosleep'
-  | 'reverie'
-  | 'leggettplatt'
-  | 'logicdata'
-  | 'okimat'
-  | 'keeson'
   | 'octo'
   | 'scanner';
 
