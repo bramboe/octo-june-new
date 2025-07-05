@@ -14,10 +14,4 @@ interface OptionsJson {
 
 const options: OptionsJson = getRootOptions();
 
-export const getProxies = () => {
-  const proxies = options.bleProxies;
-  if (Array.isArray(proxies)) {
-    return proxies;
-  }
-  return [];
-};
+export const getProxies = () => [];
