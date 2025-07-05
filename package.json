@@ -5,7 +5,6 @@
   "author": "Richard Hopton",
   "repository": "https://github.com/bramboe/octo-june-new/",
   "license": "MIT",
-  "type": "module",
   "main": "./dist/tsc/index.js",
   "types": "./dist/tsc/index.d.ts",
   "devDependencies": {
