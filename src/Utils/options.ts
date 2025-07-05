@@ -1,8 +1,6 @@
 import { readFileSync } from 'fs';
 
-export type Type =
-  | 'octo'
-  | 'scanner';
+export type Type = 'octo' | 'scanner';
 
 interface OptionsJson {
   type: Type;

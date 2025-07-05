@@ -12,4 +12,4 @@ RUN yarn build
 # Expose a default port (change if your app uses a different one)
 EXPOSE 3000
 
-CMD ["yarn", "start"] 
+CMD ["node", "dist/tsc/index.js"] 

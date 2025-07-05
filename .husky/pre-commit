@@ -1,7 +1,4 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-cd octo-new-june
-if [ -f package.json ]; then
-  yarn run lint-staged
-fi
+# Add your pre-commit checks here, or leave empty for no checks
